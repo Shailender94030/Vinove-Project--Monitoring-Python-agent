@@ -1,9 +1,38 @@
-#"Project Name: Activity Tracker with Agent-Based Monitoring"
+# Project Name: Activity Tracker with Agent-Based Monitoring
 
 *Overview:-
 This project is designed to distinguish between genuine user activity and bot activity using only a keyboard, monitor, and mouse. The system is designed to track user activities in real-time and manage the application lifecycle effectively.
-##GUI OVERVIEW:-
-![Screenshot (360)](https://github.com/user-attachments/assets/8cc9d660-58f2-46c8-b6ed-0336ac473890)
+
+## GUI OVERVIEW:-
+
+### Captcha Page:-
+![Screenshot (361)](https://github.com/user-attachments/assets/7050ace0-009a-40d1-9f94-d5f158193eb8)
+
+### Main Gui Page:-
+
+![Screenshot (362)](https://github.com/user-attachments/assets/3517eac2-40f7-41e3-895e-2f948415ec96)
+
+### Internet Connectivity:-
+
+##### Online
+![Screenshot (363)](https://github.com/user-attachments/assets/8d4c5e25-bd61-482b-b169-f47ea4f68ff6)
+#### Offline
+
+![Screenshot (365)](https://github.com/user-attachments/assets/c8dec37f-402b-40ce-b6d3-812367932a13)
+
+### Activity Tracking Preview:-
+
+![Screenshot (364)](https://github.com/user-attachments/assets/f6693dde-f5d9-4873-a7bd-567f23394e2b)
+
+## AWS Preview:-
+
+![Screenshot (357)](https://github.com/user-attachments/assets/97f4e3d3-0050-4915-b689-1f90e53f9192)
+
+![Screenshot (358)](https://github.com/user-attachments/assets/19f304c8-b520-49b0-ad13-c086c0d47ed2)
+
+![Screenshot (359)](https://github.com/user-attachments/assets/d0d84cfc-eff3-4289-9332-866710004c73)
+
+
 
 
 
