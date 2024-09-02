@@ -1,7 +1,11 @@
-"Project Name: Activity Tracker with Agent-Based Monitoring"
+#"Project Name: Activity Tracker with Agent-Based Monitoring"
 
 *Overview:-
 This project is designed to distinguish between genuine user activity and bot activity using only a keyboard, monitor, and mouse. The system is designed to track user activities in real-time and manage the application lifecycle effectively.
+##GUI OVERVIEW:-
+![Screenshot (360)](https://github.com/user-attachments/assets/8cc9d660-58f2-46c8-b6ed-0336ac473890)
+
+
 
 *Directory Structure:-
 monitoring-agent
