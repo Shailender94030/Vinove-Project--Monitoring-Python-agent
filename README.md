@@ -37,7 +37,7 @@ This project is designed to distinguish between genuine user activity and bot ac
 
 
 
-*Directory Structure:-
+##### *Directory Structure:-
 monitoring-agent
 ├── .env
 ├── .gitignore
