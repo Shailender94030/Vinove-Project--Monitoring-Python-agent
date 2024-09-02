@@ -71,7 +71,7 @@ This script is used to retrieve screenshots from an S3 bucket. It is likely part
 "Setup Instructions:"
 1. Clone the Repository
 bash-code:
->git clone https://github.com/your-username/your-repo-name.git
+>git clone https://github.com/Shailender94030/Vinove-Project--monitoring-python-agent.git
 
 >cd your-repo-name
 
