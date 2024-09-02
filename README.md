@@ -32,6 +32,7 @@ This project is designed to distinguish between genuine user activity and bot ac
 
 ![Screenshot (359)](https://github.com/user-attachments/assets/d0d84cfc-eff3-4289-9332-866710004c73)
 
+![screenshot20240829004939](https://github.com/user-attachments/assets/18f43bec-933c-4ae6-9bfc-c43c635dbf15)
 
 
 
