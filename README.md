@@ -34,6 +34,10 @@ This project is designed to distinguish between genuine user activity and bot ac
 
 ![screenshot20240829004939](https://github.com/user-attachments/assets/18f43bec-933c-4ae6-9bfc-c43c635dbf15)
 
+.Amazon S3:- For storing and managing uploaded screenshots and activity logs.
+.AWS Lambda:- For handling the backend processing of uploads, such as file storage or data transformation.
+.AWS IAM:- For managing permissions and roles required for secure interaction with S3 and Lambda.
+.Boto3:- AWS SDK for Python to interact with S3 for uploading files.
 
 
 
@@ -51,6 +55,7 @@ monitoring-agent
 
 ![Screenshot (366)](https://github.com/user-attachments/assets/8eb1acd9-2451-45d2-9d3b-19919bae27e4)
 
+##Technologies Used:
 
 *File Descriptions
 *`env`:
