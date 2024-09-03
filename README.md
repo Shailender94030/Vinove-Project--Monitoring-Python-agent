@@ -71,7 +71,8 @@ monitoring-agent
 
 ## Flow chart:-
 
-![Screenshot (366)](https://github.com/user-attachments/assets/8eb1acd9-2451-45d2-9d3b-19919bae27e4)
+![Screenshot (374)](https://github.com/user-attachments/assets/49f19752-de39-480d-9aa8-75aab028a5d1)
+
 
 ##Technologies Used:
 
