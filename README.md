@@ -6,23 +6,38 @@ This project is designed to distinguish between genuine user activity and bot ac
 ## GUI OVERVIEW:-
 
 ### Captcha Page:-
-![Screenshot (361)](https://github.com/user-attachments/assets/7050ace0-009a-40d1-9f94-d5f158193eb8)
+![Screenshot (367)](https://github.com/user-attachments/assets/8eb7e409-fc8c-4dac-893a-9d1d53f2d084)
+
+#### Invalid Captcha:-
+![Screenshot (368)](https://github.com/user-attachments/assets/e006234b-8b47-460f-9d49-108baf1bfa29)
+
+
 
 ### Main Gui Page:-
 
-![Screenshot (362)](https://github.com/user-attachments/assets/3517eac2-40f7-41e3-895e-2f948415ec96)
+![Screenshot (369)](https://github.com/user-attachments/assets/5d080605-1660-4fbd-8354-21253d9b35c2)
+
+
+
 
 ### Internet Connectivity:-
 
-##### Online
-![Screenshot (363)](https://github.com/user-attachments/assets/8d4c5e25-bd61-482b-b169-f47ea4f68ff6)
-#### Offline
+![Screenshot (371)](https://github.com/user-attachments/assets/b1c8b39d-b2d7-4347-980b-a81a9707b806)
 
-![Screenshot (365)](https://github.com/user-attachments/assets/c8dec37f-402b-40ce-b6d3-812367932a13)
+
 
 ### Activity Tracking Preview:-
 
-![Screenshot (364)](https://github.com/user-attachments/assets/f6693dde-f5d9-4873-a7bd-567f23394e2b)
+![Screenshot (370)](https://github.com/user-attachments/assets/939ca764-294f-4623-80a1-f34aa958b180)
+
+### Battery Status:-
+
+![Screenshot (372)](https://github.com/user-attachments/assets/629fca2e-2e6a-4577-8930-4fdb65c546f3)
+
+### Downloading Screenshots:-
+
+![Screenshot (373)](https://github.com/user-attachments/assets/2990ceac-54e7-4274-a0c5-92f560796e71)
+
 
 ## AWS Preview:-
 
