@@ -76,7 +76,7 @@ def show_captcha_window():
         else:
             attempts_left -= 1
             if attempts_left > 0:
-                messagebox.showerror("Error", f"Incorrect CAPTCHA. {attempts_left} attempts left.")
+                messagebox.showerror("Error", f"Incorrect CAPTCHA. {attempts_left} attempts left.", parent=captcha_window)
                 captcha_entry.delete(0, tk.END)
                 update_captcha(captcha_label)  # Update CAPTCHA
             else:
@@ -93,6 +93,10 @@ def show_captcha_window():
     # Remove maximize button
     captcha_window.resizable(False, False)
 
+    # Define color codes for the CAPTCHA window
+    ice_cold = "#a0d2eb"
+    freeze_purple = "#e5eaf5"
+
     # Center the CAPTCHA window
     window_width = 500
     window_height = 350
@@ -102,11 +106,15 @@ def show_captcha_window():
     y = (screen_height // 2) - (window_height // 2)
     captcha_window.geometry(f'{window_width}x{window_height}+{x}+{y}')
 
-    captcha_label = tk.Label(captcha_window, text=f"Solve it for Access: {jumbled_word}")
+    # Create a frame for the CAPTCHA widgets
+    captcha_frame = tk.Frame(captcha_window, bg=freeze_purple)
+    captcha_frame.pack(fill=tk.BOTH, expand=True)
+
+    captcha_label = tk.Label(captcha_frame, text=f"Solve it for Access: {jumbled_word}", bg=freeze_purple, font=("Arial", 10))
     captcha_label.pack(pady=10)
 
     # Create a frame for entry and button
-    entry_frame = tk.Frame(captcha_window)
+    entry_frame = tk.Frame(captcha_frame, bg=freeze_purple)
     entry_frame.pack(pady=10)
 
     captcha_entry = tk.Entry(entry_frame, width=30)
@@ -122,10 +130,10 @@ def show_captcha_window():
         captcha_icon = None
 
     # Use the icon in the button if loaded successfully
-    change_captcha_button = tk.Button(entry_frame, image=captcha_icon, command=on_change_captcha, width=40, height=40)
+    change_captcha_button = tk.Button(entry_frame, image=captcha_icon, command=on_change_captcha, width=40, height=40, bg=freeze_purple)
     change_captcha_button.grid(row=0, column=1)
 
-    submit_button = tk.Button(captcha_window, text="Submit", command=on_submit)
+    submit_button = tk.Button(captcha_frame, text="Submit", command=on_submit, bg=ice_cold)
     submit_button.pack(pady=10)
 
     # Keep a reference to the icon to prevent it from being garbage collected
@@ -134,16 +142,22 @@ def show_captcha_window():
     captcha_window.mainloop()
 
 
-def log_activity(message):
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    log_queue.put(f"[{timestamp}] {message}")
+
+
 
 def update_log(gui):
     while not log_queue.empty():
-        message = log_queue.get()
-        gui.activity_log.insert(tk.END, message + "\n")
-        gui.activity_log.yview(tk.END)
-    gui.root.after(100, update_log, gui)
+        try:
+            message = log_queue.get_nowait()
+            gui.root.after(0, lambda: gui.activity_log.insert(tk.END, message + "\n"))
+            gui.root.after(0, lambda: gui.activity_log.yview(tk.END))
+        except queue.Empty:
+            pass
+    gui.root.after(100, update_log, gui)  # Schedule next update
+
+
+
+
 
 def get_current_timezone():
     try:
@@ -202,7 +216,7 @@ def get_battery_status():
     if battery is None:
         return "No battery info"
     percent = battery.percent
-    plugged_in = "Plugged In" if battery.power_plugged else "Not Plugged In"
+    plugged_in = "Charging" if battery.power_plugged else "Not Charging"
     return f"{percent}% ({plugged_in})"
 
 
@@ -251,7 +265,7 @@ def check_user_activity(gui):
     now = datetime.now()
     elapsed_time = now - last_active_time
 
-    if elapsed_time.total_seconds() > 300:  # If more than 5 minutes of inactivity
+    if elapsed_time.total_seconds() > 120:  # If more than 2 minutes of inactivity
         if user_active:
             log_activity('User is inactive')
             gui.user_status_label.config(text="User Status: Inactive")
@@ -264,37 +278,69 @@ def check_user_activity(gui):
             user_active = True
             gui.active_start_time = now  # Start tracking active time
 
-def check_running_apps():
-    monitored_apps = ['chrome.exe', 'whatsapp.exe']
-    for proc in psutil.process_iter(['pid', 'name']):
-        if proc.info['name'] in monitored_apps:
-            log_activity(f'{proc.info["name"]} is running')
+
+
+
+# Function to log activity
+def log_activity(message):
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    log_queue.put(f"[{timestamp}] {message}")
+
+# Activity tracking functions
+import ctypes
+import re
+
+def get_active_window_title():
+    try:
+        hwnd = ctypes.windll.user32.GetForegroundWindow()
+        length = ctypes.windll.user32.GetWindowTextLengthW(hwnd)
+        buffer = ctypes.create_unicode_buffer(length + 1)
+        ctypes.windll.user32.GetWindowTextW(hwnd, buffer, length + 1)
+        window_title = buffer.value.strip()
+        print(f"Active window title: '{window_title}'")  # Debug statement with quotes
+        return window_title if window_title else None
+    except Exception as e:
+        log_activity(f"Error retrieving window title: {e}")
+        return None
+
+def detect_website_from_title(window_title):
+    """ Detect if the window title contains a browser and extract the website. """
+    browsers = ['Google Chrome', 'Mozilla Firefox', 'Microsoft Edge', 'Opera', 'Safari', 'Brave']
+    if any(browser in window_title for browser in browsers):
+        # Try to extract the domain or part of the URL from the title
+        website_match = re.search(r'\b[\w\-\.]+\.\w+\b', window_title)
+        if website_match:
+            website = website_match.group(0)
+            return website
+    return None
+
+def check_active_app_and_website():
+    window_title = get_active_window_title()
+    if window_title:
+        print(f"Active application or window: {window_title}")  # Debug statement
+        log_activity(f"Active application or window: {window_title}")
+
+        detected_website = detect_website_from_title(window_title)
+        if detected_website:
+            log_activity(f"Detected website: {detected_website}")
+            print(f"Detected website: {detected_website}")  # Debug statement
+        else:
+            log_activity("No website detected")
+            print("No website detected")  # Debug statement
+    else:
+        log_activity("No active window detected")
+        print("No active window detected")  # Debug statement
+
+
 
 def periodic_tasks(gui):
-    if not tracking_active:
-        return
-
+    # Add the tasks you want to perform periodically
     check_user_activity(gui)
+    check_active_app_and_website()
 
-    # Update time labels based on active/inactive periods
-    now = datetime.now()
-    if user_active:
-        gui.active_time += int((now - gui.active_start_time).total_seconds())
-        gui.active_start_time = now  # Update the active start time
-    else:
-        gui.inactive_time += int((now - gui.inactive_start_time).total_seconds())
-        gui.inactive_start_time = now  # Update the inactive start time
+    # Re-schedule the function to run again after a set time (e.g., 1 minute)
+    gui.root.after(20000, periodic_tasks, gui)  # 20000ms = 20 seconds
 
-    # Update the labels
-    gui.update_time_labels()
-
-    # Log internet status and running apps
-    internet_status = check_internet_connection()
-    log_activity(f"Internet Status: {internet_status}")
-    check_running_apps()
-
-    # Schedule periodic tasks
-    gui.root.after(1000, periodic_tasks, gui)  # Run every second
 
 def start_activity_tracker():
     global mouse_listener, keyboard_listener
